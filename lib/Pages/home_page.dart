@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_moon/widgets/custom_dropdown_button.dart';
 
 class HomePage extends StatelessWidget {
   late double _deviceHeight, _deviceWidth;
@@ -21,7 +22,7 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _pageTitle(),
-            _destinationDropDown(),
+            _bookRider(),
           ],
         ),
       )),
@@ -52,48 +53,62 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  Widget _bookRider() {
+    return Container(
+      height: _deviceHeight * 0.24,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _destinationDropDown(),
+          _travellersInformation(),
+          _rideButton(),
+        ],
+      ),
+    );
+  }
+
 //Dropdown1
   Widget _destinationDropDown() {
-    List<String> _items = [
+    return CustomDropdownButtonClass(values: const [
       'ISRO',
       'NASA',
       'SPACE X',
-    ];
+    ], width: _deviceWidth);
+  }
 
+  Widget _travellersInformation() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CustomDropdownButtonClass(values: const [
+          '1',
+          '2',
+          '3',
+        ], width: _deviceWidth * 0.45),
+        CustomDropdownButtonClass(values: const [
+          'General',
+          'Economy',
+          'Private',
+        ], width: _deviceWidth * 0.40),
+      ],
+    );
+  }
+
+  Widget _rideButton() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: _deviceWidth * 0.05),
+      margin: EdgeInsets.only(bottom: _deviceHeight * 0.01),
       width: _deviceWidth,
       decoration: BoxDecoration(
-        color: const Color.fromRGBO(
-          53,
-          53,
-          53,
-          1.0,
-        ),
-        borderRadius: BorderRadius.circular(
-          10,
-        ),
-      ),
-      child: DropdownButton(
-        value: _items.first,
-        onChanged: (_) {},
-        items: _items.map(
-          (e) {
-            return DropdownMenuItem(
-              child: Text(e),
-              value: e,
-            );
-          },
-        ).toList(),
-        underline: Container(),
-        dropdownColor: const Color.fromRGBO(
-          53,
-          53,
-          53,
-          1.0,
-        ),
-        style: const TextStyle(
-          color: Colors.white,
+          color: Colors.white, borderRadius: BorderRadius.circular(10)),
+      child: MaterialButton(
+        onPressed: () {},
+        child: const Text(
+          "Book Ride!",
+          style: TextStyle(color: Colors.black),
         ),
       ),
     );
