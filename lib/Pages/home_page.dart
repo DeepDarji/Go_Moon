@@ -12,20 +12,24 @@ class HomePage extends StatelessWidget {
     _deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
-          child: Container(
-        height: _deviceHeight,
-        width: _deviceWidth,
-        padding: EdgeInsets.symmetric(horizontal: _deviceWidth * 0.05),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
           children: [
-            _pageTitle(),
-            _bookRider(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _pageTitle(),
+                _bookRider(),
+              ],
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: _astroImageWidget(),
+            ),
           ],
         ),
-      )),
+      ),
     );
   }
 
@@ -44,6 +48,8 @@ class HomePage extends StatelessWidget {
 //Image
   Widget _astroImageWidget() {
     return Container(
+      height: _deviceHeight * 0.50,
+      width: _deviceWidth * 0.65,
       decoration: const BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.fill,
